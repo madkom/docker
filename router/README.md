@@ -1,12 +1,3 @@
-Rinetd Router
-=============
-
-## Build
-
-```bash
-make build
-```
-
 ## Usage
 
 Pass routing rules for [linked containers](https://docs.docker.com/userguide/dockerlinks/) in format:
@@ -24,7 +15,18 @@ LOGFILE=/dev/stdout
 Example:
 
 ```bash
-docker run -it --link some_web:web -e 'FORWARD[1]=80:web:80' -e 'FORWARD[2]=443:web:443' -p 80:80 -p 443:443 madkom/router
+docker run -it --link some_web:web  \
+    -e 'FORWARD[1]=80:web:80' \
+    -e 'FORWARD[2]=443:web:443' \
+    -p 80:80 \
+    -p 443:443 \
+    madkom/router
+```
+
+## Development
+
+```bash
+make build
 ```
 
 ## License
