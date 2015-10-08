@@ -17,7 +17,7 @@ foreach (array(
     'WEB_PORT_9001_TCP_ADDR' => '172.17.0.1',
     'WEB_PORT_9001_TCP_PORT' => '9001',
     'WEB_PORT_9001_TCP_PROTO' => 'tcp',
-    'FORWARD' => array('80:web:80', '9001:web:9001'),
+    'FORWARD' => array('80:web:80', '9001:web:9001', '22:localhost:23'),
          ) as $name => $value) {
     $_SERVER[$name] = $value;
 }

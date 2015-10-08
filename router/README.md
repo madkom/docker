@@ -23,6 +23,12 @@ docker run -it --link some_web:web  \
     madkom/router
 ```
 
+## Exit codes
+
+1. Missing FORWARD environment
+2. Missing service name
+3. Missing host name
+
 ## Development
 
 ```bash

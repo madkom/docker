@@ -1,21 +1,32 @@
-#!/usr/bin/env php
 <?php
 
 if (false === array_key_exists('FORWARD', $_SERVER) || 0 === sizeof($_SERVER['FORWARD'])) {
     error('Missing FORWARD environment', 1);
 }
-$ip = preg_replace('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/', '\\1', exec('hostname -i'));
 $links = links();
 foreach (rules() as $port => $rule) {
-    if (false === array_key_exists($rule['service'], $links)) {
+    $service = $rule['service'];
+    if (false === array_key_exists($service, $links)) {
+        if ($service !== gethostbyname($service)) {
+            rule($port, $service, $rule['dst']);
+            continue;
+        } else {
+            error("Missing host name: ${rule['service']}", 3);
+        }
         error("Missing service name: ${rule['service']}", 2);
     }
-    printf("${ip} ${port} %s %d\n", $links[$rule['service']][$rule['dst']]['addr'], $links[$rule['service']][$rule['dst']]['port']);
+    rule($port, $links[$rule['service']][$rule['dst']]['addr'], $links[$rule['service']][$rule['dst']]['port']);
 }
 if (array_key_exists('LOGFILE', $_SERVER) && is_string($_SERVER['LOGFILE']) && strlen($_SERVER['LOGFILE']) > 0) {
     echo "logfile ${_SERVER['LOGFILE']}\nlogcommon\n";
 }
-
+function rule($port, $addr, $dst) {
+    static $ip;
+    if (empty($ip)) {
+        $ip = preg_replace('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/', '\\1', exec('hostname -i'));
+    }
+    printf("${ip} ${port} %s %d\n", $addr, $dst);
+}
 function error($msg, $code = 1) {
     @file_put_contents('/dev/stderr', sprintf("\033[0;31mConfiguration error: %s\033[0m\n", $msg));
     exit(intval($code));
