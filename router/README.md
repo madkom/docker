@@ -28,6 +28,7 @@ docker run -it --link some_web:web  \
 1. Missing FORWARD environment
 2. Missing service name
 3. Missing host name
+4. Unable to write config file
 
 ## Development
 

@@ -3,32 +3,39 @@
 if (false === array_key_exists('FORWARD', $_SERVER) || 0 === sizeof($_SERVER['FORWARD'])) {
     error('Missing FORWARD environment', 1);
 }
+$file = end($_SERVER['argv']);
+if (file_exists($file) && !unlink($file)) {
+    error("Can't replace configuration: {$file}", 4);
+}
 $links = links();
 foreach (rules() as $port => $rule) {
     $service = $rule['service'];
     if (false === array_key_exists($service, $links)) {
         if ($service !== gethostbyname($service)) {
-            rule($port, $service, $rule['dst']);
+            rule($file, $port, $service, $rule['dst']);
             continue;
         } else {
             error("Missing host name: ${rule['service']}", 3);
         }
         error("Missing service name: ${rule['service']}", 2);
     }
-    rule($port, $links[$rule['service']][$rule['dst']]['addr'], $links[$rule['service']][$rule['dst']]['port']);
+    rule($file, $port, $links[$rule['service']][$rule['dst']]['addr'], $links[$rule['service']][$rule['dst']]['port']);
 }
 if (array_key_exists('LOGFILE', $_SERVER) && is_string($_SERVER['LOGFILE']) && strlen($_SERVER['LOGFILE']) > 0) {
-    echo "logfile ${_SERVER['LOGFILE']}\nlogcommon\n";
+    @file_put_contents('php://stdout', "Adding rule: \033[0;32mlogfile ${_SERVER['LOGFILE']}\033[0m\n");
+    @file_put_contents('php://stdout', "Adding rule: \033[0;32mlogcommon\033[0m\n");
+    file_put_contents($file, "logfile ${_SERVER['LOGFILE']}\nlogcommon\n", FILE_APPEND);
 }
-function rule($port, $addr, $dst) {
+function rule($file, $port, $addr, $dst) {
     static $ip;
     if (empty($ip)) {
         $ip = preg_replace('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/', '\\1', exec('hostname -i'));
     }
-    printf("${ip} ${port} %s %d\n", $addr, $dst);
+    @file_put_contents('php://stdout', sprintf("Adding rule: \033[0;32m${ip} ${port} %s %d\033[0m\n", $addr, $dst));
+    file_put_contents($file, sprintf("${ip} ${port} %s %d\n", $addr, $dst), FILE_APPEND);
 }
 function error($msg, $code = 1) {
-    @file_put_contents('/dev/stderr', sprintf("\033[0;31mConfiguration error: %s\033[0m\n", $msg));
+    @file_put_contents('php://stderr', sprintf("\033[0;31mConfiguration error: %s\033[0m\n", $msg));
     exit(intval($code));
 }
 function rules() {
