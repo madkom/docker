@@ -1,2 +1,2 @@
 build:
-	docker build -t madkom/router .
+	docker build --no-cache=true --rm=true --force-rm=true -t madkom/router .
