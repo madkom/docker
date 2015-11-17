@@ -1,6 +1,6 @@
 # Pacto Mock Service
 
-Docker Image for [Check here](https://github.com/bethesque/pact-mock_service).
+Docker Image for [Pack Mock Service](https://github.com/bethesque/pact-mock_service).
 
 For testing consumer side in PHP you can use [pact-php](https://github.com/mopoke/pact-php) 
 

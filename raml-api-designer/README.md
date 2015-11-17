@@ -1,6 +1,6 @@
 # Raml Api Designer
 
-Image based on [api designer](https://github.com/mulesoft/api-designer).
+Image based on [Api Designer](https://github.com/mulesoft/api-designer).
 
 ## Example
 
