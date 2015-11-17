@@ -1,0 +1,12 @@
+require 'pact/provider/proxy/tasks'
+
+Pact::ProxyVerificationTask.new :test do | task |
+ task.pact_url './spec/pacts/test.json', :pact_helper => './spec/support/testing_pact_helper'
+ task.provider_base_url "#{ENV['API_ENDPOINT']}"
+end
+
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => [:spec, 'pact:verify:test']
