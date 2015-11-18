@@ -24,7 +24,7 @@ Use to extend images with need for java support.
 ## Pact-Mock-Service
 
 Pact Mock Service served as container.  
-[Read more..](pack-mock-service/README.md)
+[Read more..](pact-mock-service/README.md)
 
 ## Pact-Provider-Proxy
 

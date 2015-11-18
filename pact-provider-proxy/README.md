@@ -1,4 +1,4 @@
-# Pacto Mock Service
+# Pacto Provider Proxy
 
 Docker Image for [Pact Provider Proxy](https://github.com/bethesque/pact-mock_service).
 
