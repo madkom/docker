@@ -6,7 +6,7 @@ It will test your provider against contract file passed to the provider generate
 
 ## Run it!
 
-Create catalog /tmp/contract and `test.json` file inside. `test.json` file need to be pact contract file.  
+Create catalog /tmp/contract and `pact.json` file inside. `pact.json` file need to be pact contract file.  
 Get your provider IP, which will be visible for `pact-provider-proxy`. If it is `http://localhost`, 
 then pass `http://172.17.42.1:80` (it is your localhost machine docker virtual IP).
 Pass it as environment variable API_ENDPOINT. 
@@ -18,7 +18,7 @@ You can catch logs and reports, if mount volume `/opt/provider/log`, `/opt/provi
 
 
 
-### Example pact contract file `test.json`
+### Example pact contract file - `pact.json`
         
     {
       "consumer": {
