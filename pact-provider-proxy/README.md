@@ -11,7 +11,7 @@ Get your provider IP, which will be visible for `pact-provider-proxy`. If it is 
 then pass `http://172.17.42.1:80` (it is your localhost machine docker virtual IP).
 Pass it as environment variable API_ENDPOINT. 
 
-    docker run -t -e API_ENDPOINT="http://172.17.42.1:80" -v /tmp/contract:/contract madkom/pact-provider-proxy
+    docker run -t --rm=true -e API_ENDPOINT="http://172.17.42.1:80" -v /tmp/contract:/contract madkom/pact-provider-proxy
     
 Container returns `0` if testing went well. 
 You can catch logs and reports, if mount volume `/opt/provider/log`, `/opt/provider/reports`
