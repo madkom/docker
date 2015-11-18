@@ -1,9 +1,12 @@
 Madkom Dockerfiles
 ==================
 
-## Rinetd Router
+## Router
 
-Used to forward tcp connections between host and linked containers.
+Used to forward tcp connections between host and linked containers.  \n
+[Read more...](router/README.md)
+
+
 
 ## License
 
