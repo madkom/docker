@@ -3,8 +3,7 @@ Madkom Dockerfiles
 
 ## Router
 
-Used to forward tcp connections between host and linked containers.  \n
-[Read more...](router/README.md)
+Used to forward tcp connections between host and linked containers.   \n[Read more...](router/README.md)
 
 
 
