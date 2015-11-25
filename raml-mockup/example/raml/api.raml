@@ -1,0 +1,111 @@
+#%RAML 0.8
+title: Test RAML
+schemas:
+  - clients: !include schemas/clients.json
+  - client: !include schemas/client.json
+  - post-put-client: !include schemas/post-put-client.json
+  - delete-client: !include schemas/delete-client.json
+
+/api/1.0/clients:
+  options:
+    responses:
+      200:
+        headers:
+          Access-Control-Allow-Origin:
+            example: |
+              *
+        body:
+          application/json:
+            schema: null
+  get:
+    description: |
+      Get clients collection
+    responses:
+      200:
+        headers:
+          Access-Control-Allow-Origin:
+            example: |
+              *
+        body:
+          application/json:
+            schema: clients
+            example: !include examples/clients.json
+  post:
+    description: |
+      Create new client
+    body:
+      application/json:
+        schema: post-put-client
+        example: !include examples/post-put-client.json
+    responses:
+      200:
+        headers:
+          Access-Control-Allow-Origin:
+            example: |
+              *
+        body:
+          application/json:
+            schema: client
+            example: !include examples/client.json
+  /{id}:
+    uriParameters:
+      id:
+        type: integer
+        example: 1
+    options:
+      responses:
+        200:
+          headers:
+            Access-Control-Allow-Origin:
+              example: |
+                *
+          body:
+            application/json:
+              schema: null
+    get:
+      description: |
+        Get one client
+      responses:
+        200:
+          headers:
+            Access-Control-Allow-Origin:
+              example: |
+                *
+          body:
+            application/json:
+              schema: client
+              example: !include examples/client.json
+    put:
+      description: |
+        Update one client
+      body:
+        application/json:
+          schema: post-put-client
+          example: !include examples/post-put-client.json
+      responses:
+        200:
+          headers:
+            Access-Control-Allow-Origin:
+              example: |
+                *
+          body:
+            application/json:
+              schema: client
+              example: !include examples/client.json
+    delete:
+      description: |
+        Delete one client
+      responses:
+        200:
+          headers:
+            Access-Control-Allow-Origin:
+              example: |
+                *
+          body:
+            application/json:
+              schema: delete-client
+              example: !include examples/delete-client.json
+
+documentation:
+  - title: Headline
+    content: !include docs/headline.md
