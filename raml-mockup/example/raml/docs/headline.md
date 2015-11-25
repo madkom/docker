@@ -1,1 +1,1 @@
-Restowe api do customer back office
+Example RAML API
