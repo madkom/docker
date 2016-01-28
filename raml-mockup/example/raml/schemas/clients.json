@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "clients": {
+      "type": "array",
+      "items": {
+        "$ref": "client.json"
+      }
+    }
+  },
+  "required": [
+    "clients"
+  ]
+}
