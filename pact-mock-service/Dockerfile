@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ruby:2.3
 
 MAINTAINER Dariusz Gafka <d.gafka@madkom.pl>
 
@@ -6,9 +6,7 @@ ENV GEM_HOME "/opt/gems"
 ENV GEM_PATH "/opt"
 ENV PACT_MOCK_SERVICE "0.7.2"
 
-RUN apt-get update -y && \
-    apt-get install -y wget ruby-dev rubygems --no-install-recommends && \
-    mkdir /opt/gems && \
+RUN mkdir /opt/gems && \
     gem install pact-mock_service -v $PACT_MOCK_SERVICE && \
     ln -s /opt/gems/gems/pact-mock_service-$PACT_MOCK_SERVICE/bin/pact-mock-service /usr/local/bin && \
     rm -rf /var/lib/apt/lists/*
