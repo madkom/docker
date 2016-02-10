@@ -17,6 +17,6 @@ EXPOSE 1234
 
 VOLUME ["/var/log/pacto", "/opt/contracts"];
 
-ENTRYPOINT ["/usr/local/bin/pack-mock-service", "--pact-specification-version", "2.0.0", "-l", "/var/log/pacto/pact-mock-service.log", "-h", "0.0.0.0", "-d", "/opt/contracts"]
+ENTRYPOINT ["pact-mock-service", "--pact-specification-version", "2.0.0", "-l", "/var/log/pacto/pact-mock-service.log", "-h", "0.0.0.0", "-d", "/opt/contracts"]
 
 CMD ["-p", "1234"]
